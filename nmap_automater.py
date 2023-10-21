@@ -4,6 +4,21 @@ import os
 import sys
 import threading
 # a quick scan to find the open ports with --min-rate 15000;
+def create_directory(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+        print(f"Directory '{directory}' created successfully.")
+    else:
+        print(f"Directory '{directory}' already exists.")
+
+def write_output_to_file(output, ip, file_suffix):
+    new_dir = "nmap"
+    create_directory(new_dir)
+    
+    file_path = f"{new_dir}/{ip}_{file_suffix}.nmap"
+    print(f"writing the output to {file_path}")
+    with open(file_path, 'w') as f:
+        f.write(output)
 def quickScan(IP):
     command = f"nmap -p- --min-rate 15000 {IP}" 
     print(f"command to be executed {command}")
@@ -50,15 +65,18 @@ def FullScanOnOpenPorts(ip, openPorts):
     stdout, stderr = process.communicate()
 
     if process.returncode == 0:
-        output = stdout.decode('utf-8')
+        output = stdout.decode('latin1')
         print(stdout.decode('utf-8'))
         print(f"writing the output to nmap/{IP}_Fullscan.nmap")
+        
         f = open(f"nmap/{IP}_FullScan.nmap",'w')
         g = open(f"nmap/00{IP}_AllInOne.nmap","a")
 
-        f.write(f"{stdout.decode('utf-8')}")
-        g.write(f"{stdout.decode('utf-8')}")
-        
+        decoded_output = stdout.decode('latin1')
+
+        f.write(decoded_output)
+        g.write(decoded_output)
+
     else:
         print(f"Error executing command: {stderr.decode('utf-8')}")
 
@@ -117,23 +135,22 @@ def AllPortScan(ip):
 
         f.write(f"{stdout.decode('utf-8')}")   
         g.write(f"{stdout.decode('utf-8')}")
-
-
 if __name__ == "__main__":
-    if len(sys.argv) != 2 or os.getuid()!=0:
-        print("further in the script i run a udp scan which requires root privilleges")
+    if len(sys.argv) != 2 or os.getuid() != 0:
+        print("further in the script I run a UDP scan which requires root privileges")
         print("Usage: sudo python3 nmap_automater.py <IP>")
         sys.exit(1)
     else:
         IP = sys.argv[1]
-        openPorts = quickScan(IP)
-        if(not openPorts):
-            print("""Not ports were open There can be few problems
-                1. machine is not pingable
-                2. I am using --min-rate 15000 some older machines, do not respond back try a basic scan
-                3. Check the IP address""")
+        open_ports = quickScan(IP)
+        if not open_ports:
+            print("""No ports were open. There can be a few problems:
+                1. Machine is not pingable.
+                2. I am using --min-rate 15000 and some older machines do not respond back. Try a basic scan.
+                3. Check the IP address.""")
             exit()
-        t4 = threading.Thread(target=FullScanOnOpenPorts, args=(IP,openPorts,))
+
+        t4 = threading.Thread(target=FullScanOnOpenPorts, args=(IP, open_ports,))
         t4.start() 
 
         t1 = threading.Thread(target=AllPortScan, args=(IP,))
@@ -145,4 +162,7 @@ if __name__ == "__main__":
         t3 = threading.Thread(target=UDPtop200Ports, args=(IP,))
         t3.start()
 
-
+        t1.join()
+        t2.join()
+        t3.join()
+        t4.join()
