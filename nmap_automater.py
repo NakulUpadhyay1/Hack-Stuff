@@ -30,7 +30,9 @@ def quickScan(IP):
             
             print(f"writing The output to nmap/{IP}_allPorts.nmap")
             f = open(f"nmap/{IP}_allPorts.nmap","w")
+            g = open(f"nmap/00{IP}_AllInOne.nmap","a")
             f.write(f"{stdout.decode('utf-8')}")
+            g.write(f"{stdout.decode('utf-8')}")
             print(f"performing a Full Scan on these open ports -> {openPorts}")
             # print(stdout2.decode('utf-8'))
             return(openPorts)
@@ -52,7 +54,10 @@ def FullScanOnOpenPorts(ip, openPorts):
         print(stdout.decode('utf-8'))
         print(f"writing the output to nmap/{IP}_Fullscan.nmap")
         f = open(f"nmap/{IP}_FullScan.nmap",'w')
+        g = open(f"nmap/00{IP}_AllInOne.nmap","a")
+
         f.write(f"{stdout.decode('utf-8')}")
+        g.write(f"{stdout.decode('utf-8')}")
         
     else:
         print(f"Error executing command: {stderr.decode('utf-8')}")
@@ -61,6 +66,7 @@ def FullScanOnOpenPorts(ip, openPorts):
 def UDPtop20Ports(ip):
     command = f"sudo nmap -sU -sC --top-ports 20 {ip}" 
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
     stdout, stderr = process.communicate()
 
     if process.returncode == 0:
@@ -68,7 +74,9 @@ def UDPtop20Ports(ip):
         print(stdout.decode('utf-8'))
         print(f"writing the output to nmap/{ip}_Top20UdpPorts.nmap")
         f = open(f"nmap/{ip}_Top20UdpPorts.nmap",'w')
+        g = open(f"nmap/00{IP}_AllInOne.nmap","a")
         f.write(f"{stdout.decode('utf-8')}")
+        g.write(f"{stdout.decode('utf-8')}")
         
     else:
         print(f"Error executing command: {stderr.decode('utf-8')}")
@@ -84,7 +92,10 @@ def UDPtop200Ports(ip):
         print(stdout.decode('utf-8'))
         print(f"writing the output to nmap/{ip}_Top200UdpPorts.nmap")
         f = open(f"nmap/{ip}_Top200UdpPorts.nmap",'w')
+        g = open(f"nmap/00{IP}_AllInOne.nmap","a")
+
         f.write(f"{stdout.decode('utf-8')}")
+        g.write(f"{stdout.decode('utf-8')}")
         
 
     else:
@@ -102,13 +113,17 @@ def AllPortScan(ip):
         print(stdout.decode('utf-8'))
         print(f"writing the output to nmap/{ip}_AllPortsFullScan.nmap")
         f = open(f"nmap/{ip}_AllPortsFullScan.nmap",'w')
+        g = open(f"nmap/00{IP}_AllInOne.nmap","a")
+
         f.write(f"{stdout.decode('utf-8')}")   
+        g.write(f"{stdout.decode('utf-8')}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or os.getuid()!=0:
         print("further in the script i run a udp scan which requires root privilleges")
         print("Usage: sudo python3 nmap_automater.py <IP>")
+        sys.exit(1)
     else:
         IP = sys.argv[1]
         openPorts = quickScan(IP)
