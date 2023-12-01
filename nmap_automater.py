@@ -45,7 +45,7 @@ def quickScan(IP):
             
             print(f"writing The output to nmap/{IP}_allPorts.nmap")
             f = open(f"nmap/{IP}_allPorts.nmap","w")
-            g = open(f"nmap/00{IP}_AllInOne.nmap","a")
+            g = open(f"nmap/00{IP}_AllInOne.nmap","w")
             f.write(f"{stdout.decode('utf-8')}")
             g.write(f"{stdout.decode('utf-8')}")
             print(f"performing a Full Scan on these open ports -> {openPorts}")
@@ -141,6 +141,7 @@ if __name__ == "__main__":
         print("Usage: sudo python3 nmap_automater.py <IP>")
         sys.exit(1)
     else:
+    
         IP = sys.argv[1]
         open_ports = quickScan(IP)
         if not open_ports:
