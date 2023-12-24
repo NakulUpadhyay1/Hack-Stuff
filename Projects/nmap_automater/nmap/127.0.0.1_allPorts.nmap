@@ -1,0 +1,10 @@
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-29 02:28 IST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Not shown: 65532 closed tcp ports (reset)
+PORT      STATE SERVICE
+3306/tcp  open  mysql
+33329/tcp open  unknown
+36909/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 0.44 seconds

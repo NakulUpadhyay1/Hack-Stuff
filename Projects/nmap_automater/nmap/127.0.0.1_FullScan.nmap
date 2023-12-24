@@ -1,0 +1,72 @@
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-29 02:28 IST
+Stats: 0:00:06 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 33.33% done; ETC: 02:28 (0:00:12 remaining)
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000038s latency).
+
+PORT      STATE SERVICE VERSION
+3306/tcp  open  mysql   MySQL 5.5.5-10.11.4-MariaDB-1
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.5.5-10.11.4-MariaDB-1
+|   Thread ID: 134
+|   Capabilities flags: 63486
+|   Some Capabilities: LongColumnFlag, Support41Auth, Speaks41ProtocolOld, FoundRows, SupportsCompression, ODBCClient, Speaks41ProtocolNew, IgnoreSpaceBeforeParenthesis, IgnoreSigpipes, SupportsTransactions, SupportsLoadDataLocal, DontAllowDatabaseTableColumn, InteractiveClient, ConnectWithDatabase, SupportsAuthPlugins, SupportsMultipleResults, SupportsMultipleStatments
+|   Status: Autocommit
+|   Salt: kQ4MiGfM.;})N.<"4|8>
+|_  Auth Plugin Name: mysql_native_password
+33329/tcp open  unknown
+36909/tcp open  unknown
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 404 Not Found
+|     Date: Thu, 28 Sep 2023 20:58:51 GMT
+|     Content-Length: 19
+|     Content-Type: text/plain; charset=utf-8
+|     404: Page Not Found
+|   GenericLines, Help, Kerberos, LDAPSearchReq, LPDString, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/plain; charset=utf-8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 404 Not Found
+|     Date: Thu, 28 Sep 2023 20:58:26 GMT
+|     Content-Length: 19
+|     Content-Type: text/plain; charset=utf-8
+|_    404: Page Not Found
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port36909-TCP:V=7.94%I=7%D=9/29%Time=6515E8F2%P=x86_64-pc-linux-gnu%r(G
+SF:enericLines,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20
+SF:text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\
+SF:x20Request")%r(GetRequest,8F,"HTTP/1\.0\x20404\x20Not\x20Found\r\nDate:
+SF:\x20Thu,\x2028\x20Sep\x202023\x2020:58:26\x20GMT\r\nContent-Length:\x20
+SF:19\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\n\r\n404:\x20Page
+SF:\x20Not\x20Found")%r(HTTPOptions,8F,"HTTP/1\.0\x20404\x20Not\x20Found\r
+SF:\nDate:\x20Thu,\x2028\x20Sep\x202023\x2020:58:26\x20GMT\r\nContent-Leng
+SF:th:\x2019\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\n\r\n404:\
+SF:x20Page\x20Not\x20Found")%r(RTSPRequest,67,"HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:
+SF:\x20close\r\n\r\n400\x20Bad\x20Request")%r(Help,67,"HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nCon
+SF:nection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(SSLSessionReq,67,"HT
+SF:TP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20cha
+SF:rset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(Ter
+SF:minalServerCookie,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Typ
+SF:e:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x
+SF:20Bad\x20Request")%r(TLSSessionReq,67,"HTTP/1\.1\x20400\x20Bad\x20Reque
+SF:st\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20c
+SF:lose\r\n\r\n400\x20Bad\x20Request")%r(Kerberos,67,"HTTP/1\.1\x20400\x20
+SF:Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConn
+SF:ection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(FourOhFourRequest,8F,
+SF:"HTTP/1\.0\x20404\x20Not\x20Found\r\nDate:\x20Thu,\x2028\x20Sep\x202023
+SF:\x2020:58:51\x20GMT\r\nContent-Length:\x2019\r\nContent-Type:\x20text/p
+SF:lain;\x20charset=utf-8\r\n\r\n404:\x20Page\x20Not\x20Found")%r(LPDStrin
+SF:g,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain
+SF:;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request
+SF:")%r(LDAPSearchReq,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Ty
+SF:pe:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\
+SF:x20Bad\x20Request");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 171.70 seconds
